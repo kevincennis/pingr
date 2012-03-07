@@ -71,7 +71,6 @@ Array.prototype.stddev = function( percent ){
         var start = Date.now();
         $.ajax({
             type: "HEAD",
-            async: true,
             url: 'ping?' + start,
             success: function(){
                 var end = Date.now(), latency = end - start;
