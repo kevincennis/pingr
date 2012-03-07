@@ -69,20 +69,27 @@ Array.prototype.stddev = function( percent ){
     // Make request, update values
     function fetch(){
         var start = Date.now();
-        $.get('ping?' + start , function(){
-            var end = Date.now(), latency = end - start;
-            pings.push( latency );
-            $ping.html( latency + 'ms' );
-            $avg.html( pings.mean() + 'ms' );
-            $median.html( pings.median() + 'ms' );
-            $min.html( pings.min() + 'ms' );
-            $max.html( pings.max() + 'ms' );
-            $stddev.html( pings.stddev() + 'ms (' + pings.stddev( true ) + '%)' );
-            $sample.html( pings.length + ' Requests' );
-            document.title = 'Pingr | ' + latency + 'ms';
-            setTimeout(function(){
-                fetch();
-            }, rate);
+        $.ajax({
+            type: "HEAD",
+            async: true,
+            url: 'ping?' + start,
+            success: function(){
+                var end = Date.now(), latency = end - start;
+                pings.push( latency );
+                $ping.html( latency + 'ms' );
+                $avg.html( pings.mean() + 'ms' );
+                $median.html( pings.median() + 'ms' );
+                $min.html( pings.min() + 'ms' );
+                $max.html( pings.max() + 'ms' );
+                $stddev.html( pings.stddev() + 'ms (' + pings.stddev( true ) + '%)' );
+                $sample.html( pings.length + ' Requests' );
+                document.title = 'Pingr | ' + latency + 'ms';
+            },
+            complete: function(){
+                setTimeout(function(){
+                    fetch();
+                }, rate);
+            }
         });
     }
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
