@@ -47,8 +47,19 @@ Array.prototype.stddev = function( percent ){
     for ( ; i < len; i++ )
         tot += Math.pow( this[i] - avg, 2 );       
     if ( percent ) 
-    	return Math.round( ( ( Math.sqrt( tot / len ) ) / avg ) * 100 );
+        return Math.round( ( ( Math.sqrt( tot / len ) ) / avg ) * 100 );
     return Math.round( Math.sqrt( tot / len ) );
+};
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Median Deviation ( original units || percentage )
+Array.prototype.meddev = function( percent ){
+    var len = this.length, med = this.median(), arr = [], i = 0;
+    for ( ; i < len; i++ )
+        arr.push( Math.abs( this[i] - med ) );
+    if ( percent ) 
+        return Math.round( ( ( arr.median() ) / med ) * 100 );
+    return arr.median();
 };
 
 /***************/
@@ -62,6 +73,7 @@ Array.prototype.stddev = function( percent ){
         $min = $('#min'),
         $max = $('#max'),
         $stddev = $('#stddev'),
+        $meddev = $('#meddev'),
         $sample = $('#sample'),
         rate = 1e3,
         pings = [];
@@ -81,6 +93,7 @@ Array.prototype.stddev = function( percent ){
                 $min.html( pings.min() + 'ms' );
                 $max.html( pings.max() + 'ms' );
                 $stddev.html( pings.stddev() + 'ms (' + pings.stddev( true ) + '%)' );
+                $meddev.html( pings.meddev() + 'ms (' + pings.meddev( true ) + '%)' );
                 $sample.html( pings.length + ' Requests' );
                 document.title = 'Pingr | ' + latency + 'ms';
             },
