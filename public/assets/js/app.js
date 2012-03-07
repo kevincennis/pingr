@@ -5,7 +5,7 @@
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Sum
 Array.prototype.sum = function(){
-    var len = this.length, tot = i = 0;
+    var len = this.length, tot = 0, i = 0;
     for ( ; i < len; i++ )
         tot += this[i];
     return tot;
@@ -43,7 +43,7 @@ Array.prototype.median = function(){
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Standard Deviation ( original units || percentage )
 Array.prototype.stddev = function( percent ){
-    var len = this.length, avg = this.mean(), tot = i = 0;
+    var len = this.length, avg = this.mean(), tot = 0, i = 0;
     for ( ; i < len; i++ )
         tot += Math.pow( this[i] - avg, 2 );       
     if ( percent ) 
