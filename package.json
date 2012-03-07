@@ -1,6 +1,6 @@
 {
   "name": "Pingr",
-  "version": "0.1.0-9",
+  "version": "0.1.0-11",
   "author": "Kevin Ennis",
   "description": "A simple little Node.js app for assessing connection latency",
   "homepage": "http://www.kevincennis.com",

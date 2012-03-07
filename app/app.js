@@ -9,13 +9,10 @@ var http = require('http'),
 /* Server */
 http.createServer(function(req, res){
 	var uri = url.parse(req.url).pathname,
-		filename = path.join(webroot, uri == '/' || uri == '' ? index : uri);
+		filename = path.join(webroot, uri == '/' ? index : uri);
 	path.exists(filename, function(exists){
     	if (!exists){
-    		res.writeHead(200, {
-    			'Content-Type': 'text/plain',
-    			'connection': 'close'
-			});
+    		res.writeHead(200, {'Content-Type': 'text/plain'});
 	    	res.end();
     	} else {
     		file.serve(req, res);
