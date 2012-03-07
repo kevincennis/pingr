@@ -1,7 +1,7 @@
 Pingr
 ===
 
-A Node.js utility for testing connection latency
+A simple little Node.js app for assessing connection latency
 ---------------------------------------
 
 ####To install:
